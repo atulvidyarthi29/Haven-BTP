@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/haven
+    username: postgres
+    password: 1234
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  application:
+    name: user-authentication
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+    username: example@gmail.com
+    password: examplepassword
+
+server:
+  port: 8081
