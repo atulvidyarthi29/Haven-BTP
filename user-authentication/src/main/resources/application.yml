@@ -23,8 +23,8 @@ spring:
           connectiontimeout: 5000
           timeout: 5000
           writetimeout: 5000
-    username: example@gmail.com
-    password: examplepassword
+    username: startupbluetech.pvt@gmail.com
+    password: Ajanta@123
 
 server:
   port: 8081
