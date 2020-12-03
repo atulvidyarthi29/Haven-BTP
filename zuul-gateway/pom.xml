@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.haven</groupId>
-	<artifactId>zuul-api-gateway</artifactId>
+	<artifactId>zuul-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>zuul-api-gateway</name>
-	<description>Demo project for Spring Boot</description>
+	<name>zuul-gateway</name>
+	<description>API gateway</description>
 
 	<properties>
 		<java.version>11</java.version>
@@ -20,6 +20,10 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
