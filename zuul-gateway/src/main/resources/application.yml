@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: zuul-api-gateway
+
+server:
+  port: 8661
+
+zuul:
+  host:
+    connect-timeout-millis: 6000000
+    socket-timeout-millis: 6000000
+  ignored-services: '*'
+  routes:
+    user-authentication:
+      path: /user/**
+      serviceId: user-authentication
+      stripPrefix: true
+    public-forum:
+      path: /forum/**
+      serviceId: public-forum
+      stripPrefix: true
