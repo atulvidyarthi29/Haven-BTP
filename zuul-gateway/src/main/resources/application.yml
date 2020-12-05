@@ -19,3 +19,8 @@ zuul:
       path: /forum/**
       serviceId: public-forum
       stripPrefix: true
+
+
+#management:
+#  security:
+#    enabled: false
