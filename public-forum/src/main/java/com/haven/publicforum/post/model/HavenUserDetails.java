@@ -1,4 +1,4 @@
-package com.haven.publicforum.users.model;
+package com.haven.publicforum.post.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

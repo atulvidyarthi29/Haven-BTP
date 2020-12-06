@@ -30,12 +30,12 @@ public class CommentService {
     }
 
     public List<Comment> getAllCommentsByUser() {
-        return commentRepository.findByUserId(userUtil.loggedInUser().get().getId());
+        return commentRepository.findByUserId(userUtil.loggedInUser().getId());
     }
 
     public void addComment(long postId, Comment comment) {
         comment.setPost(postRepository.findById(postId).get());
-        comment.setUser(userUtil.loggedInUser().get());
+        comment.setUserId(userUtil.loggedInUser().getId());
         commentRepository.save(comment);
     }
 
@@ -43,14 +43,14 @@ public class CommentService {
         Optional<Comment> comment = commentRepository.findById(id);
         comment.orElseThrow(() -> new Exception("Comment cannot be retrieved"));
 
-        if (comment.get().getUser().getId() != userUtil.loggedInUser().get().getId())
+        if (comment.get().getUserId() != userUtil.loggedInUser().getId())
             throw new Exception("Authentication Failed");
 
         commentRepository.delete(comment.get());
     }
 
     public void updateComment(long id, Comment comment) throws Exception {
-        if (comment.getUser().getId() != userUtil.loggedInUser().get().getId())
+        if (comment.getUserId() != userUtil.loggedInUser().getId())
             throw new Exception("Authentication Failed");
 
         comment.setId(id);

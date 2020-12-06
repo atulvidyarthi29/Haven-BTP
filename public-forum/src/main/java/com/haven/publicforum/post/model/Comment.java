@@ -1,6 +1,5 @@
 package com.haven.publicforum.post.model;
 
-import com.haven.publicforum.users.model.User;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
@@ -20,8 +19,7 @@ public class Comment {
     @ManyToOne
     Post post;
 
-    @ManyToOne
-    User user;
+    long userId;
 
     public long getId() {
         return id;
@@ -47,11 +45,11 @@ public class Comment {
         this.post = post;
     }
 
-    public User getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

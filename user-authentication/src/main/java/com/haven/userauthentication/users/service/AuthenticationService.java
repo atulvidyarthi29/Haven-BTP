@@ -4,13 +4,18 @@ import com.haven.userauthentication.security.JwtTokenUtil;
 import com.haven.userauthentication.users.dao.HavenUserRepository;
 import com.haven.userauthentication.users.model.AuthenticationRequest;
 import com.haven.userauthentication.users.model.AuthenticationResponse;
+import com.haven.userauthentication.users.model.HavenUserDetails;
 import com.haven.userauthentication.users.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AuthenticationService {
@@ -47,5 +52,12 @@ public class AuthenticationService {
         havenUserRepository.save(newUser);
         createAuthenticationToken(new AuthenticationRequest(
                 newUser.getUsername(), newUser.getPassword()));
+    }
+
+    public User getAuthenticatedUser(String jwt) throws Exception {
+        String username = jwtTokenUtil.extractUsername(jwt);
+        Optional<User> user = havenUserRepository.findUserByUsername(username);
+        user.orElseThrow(() -> new UsernameNotFoundException("Could not validate user"));
+        return user.get();
     }
 }

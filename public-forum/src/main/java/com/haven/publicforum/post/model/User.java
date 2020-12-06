@@ -1,14 +1,8 @@
-package com.haven.publicforum.users.model;
+package com.haven.publicforum.post.model;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "users")
 public class User {
 
-    // TODO: 02/10/2020 constraints 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String username;
     private String firstName;
@@ -16,6 +10,19 @@ public class User {
     private String email;
     private String password;
     private String roles;
+
+    public User() {
+    }
+
+    public User(long id, String username, String firstName, String lastName, String email, String password, String roles) {
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
 
     public long getId() {
         return id;
@@ -71,5 +78,18 @@ public class User {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles='" + roles + '\'' +
+                '}';
     }
 }

@@ -1,8 +1,6 @@
 package com.haven.publicforum.post.model;
 
 
-import com.haven.publicforum.users.model.User;
-
 import javax.persistence.*;
 
 
@@ -17,15 +15,14 @@ public class Post {
     long upVotes;
     long downVotes;
 
-    @ManyToOne
-    User user;
+    long userId;
 
-    public User getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser(User userId) {
-        this.user = userId;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public long getId() {

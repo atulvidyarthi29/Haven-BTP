@@ -15,12 +15,18 @@ zuul:
       path: /user/**
       serviceId: user-authentication
       stripPrefix: true
+      sensitiveHeaders:
     public-forum:
       path: /forum/**
       serviceId: public-forum
       stripPrefix: true
+      sensitiveHeaders:
 
-
-#management:
-#  security:
-#    enabled: false
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 60000

@@ -3,7 +3,6 @@ package com.haven.publicforum.post.service;
 import com.haven.publicforum.post.dao.PostRepository;
 import com.haven.publicforum.post.model.Post;
 import com.haven.publicforum.security.UserUtil;
-import com.haven.publicforum.users.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,16 +30,14 @@ public class PostService {
     }
 
     public void createPost(Post newPost) throws Exception {
-        Optional<User> loggedInUser = userUtil.loggedInUser();
-        loggedInUser.orElseThrow(() -> new Exception("User can't be authenticated"));
-        newPost.setUser(loggedInUser.get());
+        newPost.setUserId(userUtil.loggedInUser().getId());
         postRepository.save(newPost);
     }
 
     public void deletePost(long id) throws Exception {
         Optional<Post> postToDelete = postRepository.findById(id);
         postToDelete.orElseThrow(() -> new Exception("Post not found"));
-        if (postToDelete.get().getUser().getId() != userUtil.loggedInUser().get().getId())
+        if (postToDelete.get().getUserId() != userUtil.loggedInUser().getId())
             throw new Exception("Authentication Failed");
         postRepository.delete(postToDelete.get());
     }
@@ -49,7 +46,7 @@ public class PostService {
         Optional<Post> optionalPost = postRepository.findById(id);
         optionalPost.orElseThrow(() -> new Exception("Cannot retrieve the post."));
         Post postToUpdate = optionalPost.get();
-        if (postToUpdate.getUser().getId() != userUtil.loggedInUser().get().getId())
+        if (postToUpdate.getId() != userUtil.loggedInUser().getId())
             throw new Exception("Authentication Failed");
         postToUpdate.setTitle(post.getTitle());
         postToUpdate.setDescription(post.getDescription());
