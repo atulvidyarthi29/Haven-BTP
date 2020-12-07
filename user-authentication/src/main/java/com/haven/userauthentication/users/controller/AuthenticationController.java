@@ -27,7 +27,7 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<?> registerNewUser(@RequestBody User newUser) throws Exception {
         try {
-//            send a mail
+
             authenticationService.registerNewUser(newUser);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {

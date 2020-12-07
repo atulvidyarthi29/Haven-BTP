@@ -9,9 +9,6 @@ import org.springframework.stereotype.Service;
 public class UserUtil {
 
     public HavenUserDetails loggedInUser() {
-        HavenUserDetails principal = (HavenUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(principal);
-
-        return principal;
+        return (HavenUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

@@ -22,11 +22,3 @@ zuul:
       stripPrefix: true
       sensitiveHeaders:
 
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          strategy: THREAD
-          thread:
-            timeoutInMilliseconds: 60000
