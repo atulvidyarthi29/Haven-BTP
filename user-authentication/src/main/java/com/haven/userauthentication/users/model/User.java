@@ -28,6 +28,8 @@ public class User {
     @Column(nullable = false)
     private String roles;
 
+    private boolean isSuspended;
+
     private boolean isActive = false;
 
     public boolean isActive() {
@@ -92,5 +94,13 @@ public class User {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public boolean isSuspended() {
+        return isSuspended;
+    }
+
+    public void setSuspended(boolean suspended) {
+        isSuspended = suspended;
     }
 }

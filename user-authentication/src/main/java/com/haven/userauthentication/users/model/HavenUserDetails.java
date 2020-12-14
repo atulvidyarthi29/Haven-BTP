@@ -18,6 +18,7 @@ public class HavenUserDetails implements UserDetails {
     private final String email;
     private final String password;
     private final boolean isEnabled;
+    private final boolean isSuspended;
     private final List<GrantedAuthority> roles;
 
     public HavenUserDetails(User user) {
@@ -28,6 +29,7 @@ public class HavenUserDetails implements UserDetails {
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.isEnabled = user.isActive();
+        this.isSuspended = user.isSuspended();
         this.roles = Arrays.stream(user.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
@@ -55,7 +57,7 @@ public class HavenUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !isSuspended;
     }
 
     @Override

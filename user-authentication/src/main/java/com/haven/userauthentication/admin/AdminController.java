@@ -19,7 +19,7 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @PostMapping("/admin/add-invite")
+    @PostMapping("/admin/invite-admin")
     @PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
     public void inviteAdmin(@RequestBody Request req) {
         adminService.inviteAdmin(req);
@@ -40,6 +40,12 @@ public class AdminController {
     @PostMapping("/invite/register/{token}")
     public ResponseEntity<?> register(@PathVariable String token, @RequestBody User user) {
         return new ResponseEntity<>(adminService.register(token, user) ? HttpStatus.CREATED
+                : HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/admin/suspend/{username}")
+    public ResponseEntity<?> suspendAccount(@PathVariable String username) {
+        return new ResponseEntity<>(adminService.suspendAccount(username) ? HttpStatus.OK
                 : HttpStatus.BAD_REQUEST);
     }
 }

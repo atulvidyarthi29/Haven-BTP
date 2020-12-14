@@ -75,4 +75,11 @@ public class AdminService {
         return true;
     }
 
+    public boolean suspendAccount(String username) {
+        Optional<User> user = havenUserRepository.findUserByUsername(username);
+        if (user.isEmpty()) return false;
+        user.get().setSuspended(true);
+        havenUserRepository.save(user.get());
+        return true;
+    }
 }

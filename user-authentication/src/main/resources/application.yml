@@ -24,7 +24,7 @@ spring:
           timeout: 5000
           writetimeout: 5000
     username: startupbluetech.pvt@gmail.com
-    password: Ajanta@123
+    password: flruhyzvxltrmtqm
 
 server:
   port: 8081
