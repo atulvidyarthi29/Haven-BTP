@@ -35,11 +35,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         final String authorizationHeader = httpServletRequest.getHeader("Authorization");
 
         User user = null;
-        String jwt = null;
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            jwt = authorizationHeader.substring(7);
-            user = restTemplate.getForObject("http://user-authentication/" + jwt, User.class);
+            user = restTemplate.getForObject(
+                    "http://user-authentication/validate-token/" + authorizationHeader.substring(7), User.class);
         }
 
         if (user != null && SecurityContextHolder.getContext().getAuthentication() == null) {

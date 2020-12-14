@@ -12,7 +12,7 @@ zuul:
   ignored-services: '*'
   routes:
     user-authentication:
-      path: /user/**
+      path: /users/**
       serviceId: user-authentication
       stripPrefix: true
       sensitiveHeaders:

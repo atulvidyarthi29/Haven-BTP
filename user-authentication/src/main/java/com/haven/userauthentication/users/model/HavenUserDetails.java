@@ -17,6 +17,7 @@ public class HavenUserDetails implements UserDetails {
     private final String lastName;
     private final String email;
     private final String password;
+    private final boolean isEnabled;
     private final List<GrantedAuthority> roles;
 
     public HavenUserDetails(User user) {
@@ -26,6 +27,7 @@ public class HavenUserDetails implements UserDetails {
         this.lastName = user.getLastName();
         this.email = user.getEmail();
         this.password = user.getPassword();
+        this.isEnabled = user.isActive();
         this.roles = Arrays.stream(user.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
@@ -63,7 +65,7 @@ public class HavenUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isEnabled;
     }
 
     public long getId() {

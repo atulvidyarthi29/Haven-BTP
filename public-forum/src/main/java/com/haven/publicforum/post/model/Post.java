@@ -1,5 +1,6 @@
 package com.haven.publicforum.post.model;
 
+import com.haven.publicforum.Authority.model.AuthorityVerdict;
 
 import javax.persistence.*;
 
@@ -14,6 +15,9 @@ public class Post {
     String description;
     long upVotes;
     long downVotes;
+
+    @OneToOne
+    AuthorityVerdict authorityVerdict;
 
     long userId;
 
@@ -65,4 +69,11 @@ public class Post {
         return downVotes;
     }
 
+    public AuthorityVerdict getAuthorityVerdict() {
+        return authorityVerdict;
+    }
+
+    public void setAuthorityVerdict(AuthorityVerdict authorityVerdict) {
+        this.authorityVerdict = authorityVerdict;
+    }
 }

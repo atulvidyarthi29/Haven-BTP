@@ -3,6 +3,9 @@ package com.haven.publicforum.post.controller;
 import com.haven.publicforum.post.model.Post;
 import com.haven.publicforum.post.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,9 +26,11 @@ public class PostController {
         return postService.getAllPosts();
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("create")
-    public void createNewPost(@RequestBody Post newPost) throws Exception {
+    public ResponseEntity<?> createNewPost(@RequestBody Post newPost) throws Exception {
         postService.createPost(newPost);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")

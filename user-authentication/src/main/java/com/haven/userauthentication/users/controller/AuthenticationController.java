@@ -27,7 +27,6 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<?> registerNewUser(@RequestBody User newUser) throws Exception {
         try {
-
             authenticationService.registerNewUser(newUser);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
@@ -35,7 +34,13 @@ public class AuthenticationController {
         }
     }
 
-    @GetMapping("/{jwt}")
+    @GetMapping("/confirm-account")
+    public ResponseEntity<?> confirmUserAccount(@RequestParam("token") String confirmationToken) {
+        return new ResponseEntity<>(authenticationService.confirmAccount(confirmationToken) ?
+                HttpStatus.OK : HttpStatus.UNAUTHORIZED);
+    }
+
+    @GetMapping("/validate-token/{jwt}")
     public ResponseEntity<?> getAuthenticatedUser(@PathVariable String jwt) throws Exception {
         return ResponseEntity.ok(authenticationService.getAuthenticatedUser(jwt));
     }
