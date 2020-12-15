@@ -1,16 +1,18 @@
 package com.haven.publicforum.Authority.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class AuthorityVerdict {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
     String verdict;
     long userId;
-    boolean isAuthentic;
 
     public long getId() {
         return id;
@@ -34,13 +36,5 @@ public class AuthorityVerdict {
 
     public void setUserId(long userId) {
         this.userId = userId;
-    }
-
-    public boolean isAuthentic() {
-        return isAuthentic;
-    }
-
-    public void setAuthentic(boolean authentic) {
-        isAuthentic = authentic;
     }
 }

@@ -16,8 +16,14 @@ public class Post {
     long upVotes;
     long downVotes;
 
+    @Column(nullable = false)
+    boolean isAnonymous;
+
     @OneToOne
     AuthorityVerdict authorityVerdict;
+
+    @Column(nullable = false)
+    Department dept;
 
     long userId;
 
@@ -75,5 +81,21 @@ public class Post {
 
     public void setAuthorityVerdict(AuthorityVerdict authorityVerdict) {
         this.authorityVerdict = authorityVerdict;
+    }
+
+    public boolean isAnonymous() {
+        return isAnonymous;
+    }
+
+    public void setAnonymous(boolean anonymous) {
+        isAnonymous = anonymous;
+    }
+
+    public Department getDept() {
+        return dept;
+    }
+
+    public void setDept(Department dept) {
+        this.dept = dept;
     }
 }
