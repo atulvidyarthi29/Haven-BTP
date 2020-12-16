@@ -52,14 +52,22 @@ public class PostController {
         postService.updatePost(id, post);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("{postId}/up-vote")
     public void upVote(@PathVariable long postId){
         upVotesDownVotesService.setScore(postId, 10);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("{postId}/down-vote")
     public void downVote(@PathVariable long postId) {
         upVotesDownVotesService.setScore(postId, -10);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("{postId}/unmark")
+    public void unmark(@PathVariable long postId){
+        upVotesDownVotesService.setScore(postId, 0);
     }
 
 }

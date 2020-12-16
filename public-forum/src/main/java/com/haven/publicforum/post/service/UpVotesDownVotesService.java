@@ -33,17 +33,18 @@ public class UpVotesDownVotesService {
                 post.get(),
                 userUtil.loggedInUser().getId());
 
-        post.get().setUpVotes(upVotesDownVotesRepository.countUpVoteDownVotesById(votesKey));
+        if (score == 0) {
+            upVotesDownVotesRepository.deleteById(votesKey);
+        } else {
+            upVoteDownVotes.setId(votesKey);
+            upVoteDownVotes.setVote(score);
+            upVotesDownVotesRepository.save(upVoteDownVotes);
+        }
+        post.get().setUpVotes(upVotesDownVotesRepository.countUpVoteDownVotesByIdAndVote(votesKey, 10));
+        post.get().setDownVotes(upVotesDownVotesRepository.countUpVoteDownVotesByIdAndVote(votesKey, -10));
         postRepository.save(post.get());
 
-        upVoteDownVotes.setId(votesKey);
-        upVoteDownVotes.setUpOrDown(score);
-        upVotesDownVotesRepository.save(upVoteDownVotes);
         return true;
-    }
-
-    public void unMarkPost() {
-
     }
 
 }

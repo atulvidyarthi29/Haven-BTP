@@ -10,11 +10,12 @@ public class User {
     private String email;
     private String password;
     private String roles;
+    private long reputation;
 
     public User() {
     }
 
-    public User(long id, String username, String firstName, String lastName, String email, String password, String roles) {
+    public User(long id, String username, String firstName, String lastName, String email, String password, String roles, long reputation) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -22,6 +23,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.reputation = reputation;
     }
 
     public long getId() {
@@ -78,6 +80,14 @@ public class User {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public long getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(long reputation) {
+        this.reputation = reputation;
     }
 
     @Override

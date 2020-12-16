@@ -1,21 +1,19 @@
 package com.haven.publicforum.post.model;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
 
-@Entity
-public class UpVoteDownVotes {
-
+public class AnswerUpVoteAndDownVote {
     @EmbeddedId
-    VotesKey id;
+    AnswerVotesKey id;
 
     int vote;
 
-    public VotesKey getId() {
-        return id;
+    public AnswerUpVoteAndDownVote() {
     }
 
-    public void setId(VotesKey id) {
+    public AnswerUpVoteAndDownVote(AnswerVotesKey id, int vote) {
         this.id = id;
+        this.vote = vote;
     }
 
     public int getVote() {

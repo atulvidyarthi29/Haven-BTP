@@ -1,12 +1,10 @@
 package com.haven.publicforum.post.model;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
-@Data
 public class Comment {
 
     @Id
@@ -18,6 +16,9 @@ public class Comment {
 
     @ManyToOne
     Post post;
+
+    long likes;
+    long dislikes;
 
     long userId;
 
@@ -51,5 +52,21 @@ public class Comment {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(long likes) {
+        this.likes = likes;
+    }
+
+    public long getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(long dislikes) {
+        this.dislikes = dislikes;
     }
 }
