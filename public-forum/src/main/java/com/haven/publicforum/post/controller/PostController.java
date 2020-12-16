@@ -2,6 +2,7 @@ package com.haven.publicforum.post.controller;
 
 import com.haven.publicforum.post.model.Post;
 import com.haven.publicforum.post.service.PostService;
+import com.haven.publicforum.post.service.UpVotesDownVotesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +15,14 @@ import java.util.List;
 @RequestMapping("posts")
 public class PostController {
 
-    public PostService postService;
+    private final PostService postService;
+    private final UpVotesDownVotesService upVotesDownVotesService;
+
 
     @Autowired
-    public PostController(PostService postService) {
+    public PostController(PostService postService, UpVotesDownVotesService upVotesDownVotesService) {
         this.postService = postService;
+        this.upVotesDownVotesService = upVotesDownVotesService;
     }
 
     @GetMapping("")
@@ -46,6 +50,16 @@ public class PostController {
     @PutMapping("update/{id}")
     public void updatePostById(@PathVariable("id") long id, @RequestBody Post post) throws Exception {
         postService.updatePost(id, post);
+    }
+
+    @PostMapping("{postId}/up-vote")
+    public void upVote(@PathVariable long postId){
+        upVotesDownVotesService.setScore(postId, 10);
+    }
+
+    @PostMapping("{postId}/down-vote")
+    public void downVote(@PathVariable long postId) {
+        upVotesDownVotesService.setScore(postId, -10);
     }
 
 }

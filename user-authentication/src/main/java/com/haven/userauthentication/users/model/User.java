@@ -28,7 +28,6 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @JsonIgnore
     @Column(nullable = false)
     private String roles;
 
