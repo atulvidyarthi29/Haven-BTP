@@ -6,6 +6,7 @@ import com.haven.userauthentication.users.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -45,10 +46,11 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.getAuthenticatedUser(jwt));
     }
 
-    @PostMapping("/reputation/{userId}/{reputation}")
+    @PreAuthorize("permitAll()")
+    @GetMapping("/reputation/{userId}/{reputation}")
     public ResponseEntity<?> computeReputation(@PathVariable long userId, @PathVariable long reputation) {
         return new ResponseEntity<>(
-                authenticationService.computeReputation(userId, reputation)?HttpStatus.OK:HttpStatus.BAD_REQUEST);
+                authenticationService.computeReputation(userId, reputation) ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
 }

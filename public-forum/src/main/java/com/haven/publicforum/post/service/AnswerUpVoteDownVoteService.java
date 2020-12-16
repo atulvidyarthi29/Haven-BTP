@@ -48,9 +48,9 @@ public class AnswerUpVoteDownVoteService {
                         .countAnswerUpVoteAndDownVoteByIdAndVote(answerVotesKey, -10));
         commentRepository.save(comment.get());
 
-        System.out.println(answerUpVoteDownVoteRepository.reputationScore(comment.get().getUserId()));
-//        restTemplate.execute("http://user-authentication/reputation/" + comment.get().getUserId()
-//                + "/" + ,);
+        System.out.println(answerUpVoteDownVoteRepository.reputationScore(comment.get()));
+        restTemplate.getForObject("http://user-authentication/reputation/" + comment.get().getUserId()
+                + "/" + answerUpVoteDownVoteRepository.reputationScore(comment.get()), Object.class);
 
         return true;
     }

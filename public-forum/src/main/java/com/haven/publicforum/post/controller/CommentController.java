@@ -30,7 +30,7 @@ public class CommentController {
         return commentService.getAllCommentsByUser();
     }
 
-    @PostMapping("post/{postId}/newComment")
+    @PostMapping("post/{postId}/new-comment")
     public void addNewComment(@PathVariable("postId") long postId, @RequestBody Comment comment) {
         commentService.addComment(postId, comment);
     }

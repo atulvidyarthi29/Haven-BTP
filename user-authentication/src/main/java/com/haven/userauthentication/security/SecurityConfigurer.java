@@ -39,6 +39,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register", "/authenticate", "/validate-token/**", "/confirm-account").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN", "OWNER")
                 .antMatchers("/invite/register/**").permitAll()
+                .antMatchers("/reputation/**").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
