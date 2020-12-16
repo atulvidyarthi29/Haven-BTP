@@ -1,5 +1,7 @@
 package com.haven.userauthentication.users.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,9 +24,11 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String roles;
 

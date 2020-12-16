@@ -16,7 +16,6 @@ public class Post {
     long upVotes;
     long downVotes;
 
-    @Column(nullable = false)
     boolean isAnonymous;
 
     @OneToOne

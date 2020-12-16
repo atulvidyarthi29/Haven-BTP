@@ -49,7 +49,8 @@ public class AuthenticationService {
         final UserDetails userDetails = havenUserDetailService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
 
-        return new AuthenticationResponse(jwt);
+        return new AuthenticationResponse(jwt, havenUserRepository.findUserByUsername(
+                authenticationRequest.getUsername()).get());
     }
 
 
@@ -72,7 +73,7 @@ public class AuthenticationService {
 
     public boolean confirmAccount(String confirmationToken) {
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
-        if(token != null) {
+        if (token != null) {
             User user = havenUserRepository.findByEmailIgnoreCase(token.getUser().getEmail());
             user.setActive(true);
             havenUserRepository.save(user);
