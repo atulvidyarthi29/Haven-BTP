@@ -2,9 +2,10 @@ package com.haven.publicforum.post.model;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 @Embeddable
-public class AnswerVotesKey {
+public class AnswerVotesKey implements Serializable {
 
     @ManyToOne
     Comment comment;

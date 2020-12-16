@@ -88,4 +88,12 @@ public class AuthenticationService {
         user.orElseThrow(() -> new UsernameNotFoundException("Could not validate user"));
         return user.get();
     }
+
+    public boolean computeReputation(long userId, long reputation) {
+        Optional<User> user = havenUserRepository.findById(userId);
+        if (user.isEmpty()) return false;
+        user.get().setReputation(reputation);
+        havenUserRepository.save(user.get());
+        return true;
+    }
 }

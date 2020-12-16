@@ -1,7 +1,5 @@
 package com.haven.userauthentication.users.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -29,6 +27,8 @@ public class User {
 
     @Column(nullable = false)
     private String roles;
+
+    private long reputation;
 
     private boolean isSuspended;
 
@@ -104,5 +104,13 @@ public class User {
 
     public void setSuspended(boolean suspended) {
         isSuspended = suspended;
+    }
+
+    public long getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(long reputation) {
+        this.reputation = reputation;
     }
 }

@@ -45,4 +45,10 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.getAuthenticatedUser(jwt));
     }
 
+    @PostMapping("/reputation/{userId}/{reputation}")
+    public ResponseEntity<?> computeReputation(@PathVariable long userId, @PathVariable long reputation) {
+        return new ResponseEntity<>(
+                authenticationService.computeReputation(userId, reputation)?HttpStatus.OK:HttpStatus.BAD_REQUEST);
+    }
+
 }
