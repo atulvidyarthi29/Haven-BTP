@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins="*")
 @PreAuthorize("hasRole('JOURNALIST')")
 @RequestMapping("/journalist")
 public class JournalistController {

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("")
+@CrossOrigin(origins="*")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
@@ -43,6 +44,7 @@ public class AuthenticationController {
 
     @GetMapping("/validate-token/{jwt}")
     public ResponseEntity<?> getAuthenticatedUser(@PathVariable String jwt) throws Exception {
+        System.out.println(jwt);
         return ResponseEntity.ok(authenticationService.getAuthenticatedUser(jwt));
     }
 
