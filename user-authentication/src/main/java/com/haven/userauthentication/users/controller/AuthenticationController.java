@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
@@ -53,6 +53,12 @@ public class AuthenticationController {
     public ResponseEntity<?> computeReputation(@PathVariable long userId, @PathVariable long reputation) {
         return new ResponseEntity<>(
                 authenticationService.computeReputation(userId, reputation) ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("permitAll()")
+    @GetMapping("/user-details/{userId}")
+    public User userFromId(@PathVariable long userId) {
+        return authenticationService.getUserById(userId);
     }
 
 }

@@ -15,25 +15,36 @@ export default class Blog extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            posts: []
+            posts: [],
         };
     }
 
     componentDidMount() {
         const jwt = AuthService.getCurrentJWT();
-
         axios.get(POST_URL, {headers: {
             "Authorization": "Bearer " + jwt
         }})
                 .then(response => response.data)
                 .then((data) => {
                     console.log(data);
+                    if (data.userId)
+                        data.userId = this.getUserName(data.userId);
+                    else data.userId = "anonymous";
                     this.setState({
                         posts: data
                     });
                 }
             );
-        // console.log(this.state.posts);
+        console.log(this.state.posts);
+
+    }
+
+    getUserName(id) {
+        axios.get("http://localhost:8661/user-details/" + id)
+        .then(response => response.data)
+        .then((data)=> {
+            console.log(data.username);
+            return data.username;});
     }
 
     render() {
@@ -64,19 +75,28 @@ export default class Blog extends Component{
                     
                 <ButtonGroup>
                 
-                  <Link to="/trending-today">
+                  <Link to="/journalists">
                   <center>
                   <Button tag="a" color="primary"  >
                     
-                    Trending Today
+                    Journalists
                     </Button>
                     </center>
                     </Link>
                     
-                    <Link to="">
+                    <Link to="/authorities">
                   <Button tag="a" color="dark"  >
-                    Go Back
+                    Authorities
                     </Button>
+                    </Link>
+
+                    <Link to="/blog-post">
+                  <center>
+                  <Button tag="a" color="primary"  >
+                    
+                    Write a post
+                    </Button>
+                    </center>
                     </Link>
                     
                 </ButtonGroup>
@@ -111,19 +131,20 @@ export default class Blog extends Component{
                                             <div className="blog-box row" key={post.id}>
                                                 <div className="col-md-4">
                                                     <div className="post-media">
-                                                        <a href="" title="">
+                                                        <a href="\blog-details" title="">
                                                             <img src="../logo192.png" alt="" className="img-fluid"/>
                                                             <div className="hovereffect"></div>
                                                         </a>
                                                     </div>
                                                 </div>
                                                 <div className="blog-meta big-meta col-md-8">
-                                                    <h4><a href="#" title="">Top 10 phone applications and 2017 mobile design awards</a></h4>
-                                                    <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio. </p>
+                                                    <h4><a href="\blog-details" title="">{post.title}</a></h4>
+                                                    <p>{post.description}</p>
                                                     <small className="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Reviews</a></small>
-                                                    <small><a href="tech-single.html" title="">21 July, 2017</a></small>
-                                                    <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                                    <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 1114</a></small>
+                                                    <small><a href="tech-single.html" title="">17 December, 2020</a></small>
+                                                    <small><a href="tech-author.html" title="">by user</a></small>
+                                                    <small><a href="tech-single.html" title="" style={{color: "white"}}><i class="fa fa-eye"></i> {post.upVotes}</a></small>
+                                                    <small><a href="tech-single.html" title="" style={{color: "white"}}><i class="fa fa-eye"></i> {post.downVotes}</a></small>
                                                 </div>
                                             </div>                    
                                     ))

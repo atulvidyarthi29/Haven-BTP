@@ -8,6 +8,7 @@ import com.haven.userauthentication.users.model.AuthenticationResponse;
 import com.haven.userauthentication.users.model.ConfirmationToken;
 import com.haven.userauthentication.users.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -95,5 +96,9 @@ public class AuthenticationService {
         user.get().setReputation(reputation);
         havenUserRepository.save(user.get());
         return true;
+    }
+
+    public User getUserById(long userId) {
+        return havenUserRepository.findById(userId).get();
     }
 }
